@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# SQL Server Management Studio Solution File, Format Version 18.00
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "SQL AbfrageKurs", "SQL AbfrageKurs\SQL AbfrageKurs.ssmssqlproj", "{8D754F9D-BC32-4987-906E-0DAC05C60C39}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Default|Default = Default|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8D754F9D-BC32-4987-906E-0DAC05C60C39}.Default|Default.ActiveCfg = Default
+		{283AD28A-24EB-4FC3-81A1-1464DACF407B}.Default|Default.ActiveCfg = Default
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {282E99E3-74B2-474F-8C16-FFB2E63C784B}
+	EndGlobalSection
+EndGlobal
