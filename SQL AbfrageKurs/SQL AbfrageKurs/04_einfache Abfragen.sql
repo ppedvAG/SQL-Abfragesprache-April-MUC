@@ -60,3 +60,15 @@ order by Difftage desc
 
 
 
+Select Spalten, 'text', Zahlen, Mathe
+		Spalte * Spalte , Spalte * Wert AS ALIAS
+FROM
+		TABELLEN
+ORDER BY Spalte [ALIAS] asc|desc, Spalte [ALIAS] asc|desc
+
+
+select * from orders order by customerid desc, orderdate desc
+
+
+select 100,* from orders order by 2,5 --nach Spaltenposition sortieren
+
