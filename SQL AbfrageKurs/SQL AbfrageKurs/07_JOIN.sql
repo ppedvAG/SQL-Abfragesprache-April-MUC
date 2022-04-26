@@ -88,6 +88,18 @@ select * from
 
 
 
+--CROSS JOIN
+--
+
+--jeder DS mit jedem DS der anderen verknüpfen
+
+select * from customers cross join orders
+
+--FULL JOIN
+--= LEFT UND RIGHT JOIN
+select * from customers c full join orders o on c.CustomerID=o.CustomerID
+
+select * from customers c  join orders o on c.CustomerID=o.CustomerID
 
 
 
@@ -95,4 +107,51 @@ select * from
 
 
 
-*/
+
+
+
+--JOINS über mehr Tabellen
+
+select * from Tabelle1 A inner join Tabelle2 B on A.Sp1 = B.Sp2
+									   inner join Tabelle3 C on C.Sp3 = B.Sp2
+									   inner join Tabelle4 D on D.sp5 = A.sp5
+									   inner join Tabelle5 E on E.sp2 = D.sp6
+
+--Liste aller Firmen und der Produkte, die sie kauften
+
+
+select 
+			c.CompanyName,p.ProductName
+from  customers c inner join orders o					on c.CustomerID	=	o.CustomerID
+							  inner join [Order Details] od on od.OrderID		=	o.OrderID
+							  inner join Products p				on p.ProductID	=	od.ProductID
+ORDER BY c.CompanyName
+
+
+--Welcher Angestellte hat welchen Kunden, welches Produkt verkauft
+
+select 
+			c.CompanyName,p.ProductName, e.lastname
+from  customers c 
+							inner join orders o					on c.CustomerID	=	o.CustomerID
+						  	 inner join [Order Details] od on od.OrderID		=	o.OrderID
+							  inner join Products p				on p.ProductID	=	od.ProductID
+							  inner join Employees e on e.EmployeeID=o.employeeid
+ORDER BY c.CompanyName
+
+
+--Welcher Kunden hat Seafood gekauft
+select top 10 * from Categories
+
+
+
+select 
+			c.CompanyName--,p.ProductName, e.lastname
+from  customers c 
+								inner join orders o					on c.CustomerID	=	o.CustomerID
+						  		inner join [Order Details] od	on od.OrderID		=	o.OrderID
+								inner join Products p				on p.ProductID	  =	od.ProductID
+								inner join Employees e				on e.EmployeeID =o.employeeid
+								inner join Categories cat			on cat.CategoryID=p.CategoryID
+where cat.CategoryName = 'Seafood'
+ORDER BY c.CompanyName

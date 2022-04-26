@@ -2,7 +2,7 @@
 
 select 'TXT', Zahlen, Mathe, F() as ALIAS
 			Spalten, * alle Spalten des From
-from Tabelle
+from Tabelle..oder Tabellenartiges
 order by Spalte|ALIAS asc (default)|desc
 
 Customers 91 
