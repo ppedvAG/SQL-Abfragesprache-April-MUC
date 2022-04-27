@@ -78,6 +78,24 @@ from o1 inner join [Order Details] od on od.OrderID=o1.OrderID where od.ProductI
 
 
 
+select * from o1
+
+--lösche die Frachtkosten aus o1 bei der  Bestellung 10250 ---  hihihihihihi
+
+update o1 set freight = NULL where orderid = 10250
+
+select * from o1
+
+
+
+
+
+
+
+
+
+
+
 
 
 
