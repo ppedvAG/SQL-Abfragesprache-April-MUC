@@ -6,8 +6,10 @@ Prozedur hat meist komplette Businesslogik
 Prozeduren sin dnur ausführbar.. exec proc 
 sind nicht direkt kombinierbar mit SELECT (zb Joinen)
 
-
-
+create proc gpName @par int, @par2 int,...
+as
+CODE (INS UP DEL SELECT  EXEC...)
+GO
 
 */
 
@@ -60,3 +62,74 @@ select getdate()
 GO
 
 exec gpdemo3
+
+
+
+--Lösche best Kunden mit Hilfe einer Prozedur
+begin tran
+exec gpDelKunde 'ALFKI' --aus Customers
+rollback
+-- AM Ende rollback
+
+create or alter proc gpDelKunde @KdId varchar(5)
+as
+print 'so war es vorher'
+select count(*) from customers where customerid = @KdId
+select count(*) from orders where customerid = @KdId
+select count(*) from [Order Details] where orderid in (Select orderid from orders where customerid = @KdId)
+print  ' jetzt wird gelöscht'
+delete from [Order Details] where orderid in (Select orderid from orders where customerid =@KdId)
+delete from orders where customerid = @KdId
+delete from customers where customerid =@KdId
+print 'so ist es jetzt'
+
+
+create or alter proc gpDelKunde @KdId varchar(5)
+as
+waitfor delay '00:00:05'
+print 'Das ist der akt Bestand..'
+select count(*) from customers where customerid = @KdId
+select count(*) from orders where customerid = @KdId
+select count(*) from [Order Details] where orderid in (Select orderid from orders where customerid = @KdId)
+print 'jetzt wird gelöscht..'
+waitfor delay '00:00:05'
+delete from [Order Details] where orderid in (Select orderid from orders where customerid = @KdId)
+delete  from orders where customerid = @KdId
+delete from customers where customerid = @KdId
+
+print 'und das bleibt übrig'
+waitfor delay '00:00:05'
+select count(*) from customers where customerid = @KdId
+select count(*) from orders where customerid = @KdId
+select count(*) from [Order Details] where orderid in (Select orderid from orders where customerid = @KdId)
+
+
+
+begin tran
+exec gpDelKunde 'BLAUS'
+rollback
+
+
+----Ergebnis der rozedur weiterverwenden
+
+
+create or alter proc gpdemo4 @par1 int
+as
+select @par1*100
+
+select * from orders where freight > (exec gpdemo4 ..) --geht nicht 
+
+
+create or alter proc gpdemo4 @par1 int,  @par2 int output --ist auch input
+as
+select @par2=@par1*100
+
+declare @var1 as int
+exec gpdemo4 100, @par2 = @var1 output
+select @var1
+
+
+
+
+
+
